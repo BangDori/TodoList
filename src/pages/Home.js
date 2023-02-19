@@ -11,7 +11,7 @@ const Home = () => {
     <HomeBox>
       {/* 시계 기능 추가 필요 */}
       <div ref={clock} className="timer">
-        00:00:00
+        --:--:--
       </div>
       <img src="/todo-list.png" alt="todo logo" />
     </HomeBox>
