@@ -1,28 +1,18 @@
-import styled from "styled-components";
-import React from "react";
-
-const HomeBox = styled.div`
-  text-align: center;
-
-  & div {
-    margin: 8px 0;
-    font-size: 44px !important;
-    font-weight: 700;
-    letter-spacing: 2.4px;
-    color: #ad7be9;
-  }
-
-  & img {
-    width: 176px;
-    vertical-align: middle;
-  }
-`;
+import React, { useRef } from "react";
+import { useTimer } from "../hooks/useTimer";
+import HomeBox from "../styles/pages/HomeBox";
 
 const Home = () => {
+  const clock = useRef(null);
+
+  useTimer({ clock });
+
   return (
     <HomeBox>
       {/* 시계 기능 추가 필요 */}
-      <div>00:00:00</div>
+      <div ref={clock} className="timer">
+        00:00:00
+      </div>
       <img src="/todo-list.png" alt="todo logo" />
     </HomeBox>
   );
