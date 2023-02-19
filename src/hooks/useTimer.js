@@ -1,26 +1,27 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
-export function useTimer({ clock }) {
-  const [timer, setTimer] = useState({
-    hour: "",
-    minute: "",
-    second: "",
-  });
-  const { hour, minute, second } = timer;
+function getDate() {
+  const date = new Date();
+  const hour = date.getHours().toString().padStart(2, "0");
+  const minute = date.getMinutes().toString().padStart(2, "0");
+  const second = date.getSeconds().toString().padStart(2, "0");
+
+  return { hour, minute, second };
+}
+
+export async function useTimer({ clock }) {
+  // clock.current.textContent = `${getDate().hour}:${getDate().minute}:${
+  //   getDate().second
+  // })
+  // }`;
 
   useEffect(() => {
-    const date = new Date();
-
-    setTimer({
-      hour: date.getHours().toString().padStart(2, "0"),
-      minute: date.getMinutes().toString().padStart(2, "0"),
-      second: date.getSeconds().toString().padStart(2, "0"),
-    });
-
     let intervalClock = setInterval(() => {
+      const { hour, minute, second } = getDate();
+
       clock.current.textContent = `${hour}:${minute}:${second}`;
     }, 1000);
 
     return () => clearInterval(intervalClock);
-  }, []);
+  }, [clock]);
 }
