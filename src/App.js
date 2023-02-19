@@ -1,6 +1,6 @@
-import styled from "styled-components";
 import Menu from "./components/Menu";
 import ContentList from "./pages/ContentList";
+import Box from "./styles/Box";
 
 const menus = [
   {
@@ -24,26 +24,6 @@ const menus = [
     link: "/todos",
   },
 ];
-
-const Box = styled.div`
-  display: flex;
-  align-items: center;
-  width: 1200px;
-  height: 90vh;
-  margin: 0 auto;
-
-  & ul,
-  & li,
-  & div,
-  & a {
-    padding: 0;
-    margin: 0;
-    list-style: none;
-    text-decoration: none;
-    color: black;
-    font-size: 14px;
-  }
-`;
 
 const App = () => {
   return (

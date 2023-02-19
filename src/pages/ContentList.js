@@ -4,12 +4,7 @@ import Home from "./Home";
 import Login from "./Login";
 import Register from "./Register";
 import Todos from "./Todos";
-import styled from "styled-components";
-
-const ListBox = styled.div`
-  display: inline-block;
-  width: 360px;
-`;
+import ListBox from "../styles/pages/ListBox";
 
 const ContentList = () => {
   return (
