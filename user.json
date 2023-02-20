@@ -1,0 +1,28 @@
+{
+  "users": [
+    {
+      "user_name": "admin",
+      "user_id": "admin",
+      "user_password": "1234",
+      "id": 1
+    },
+    {
+      "user_name": "Test",
+      "user_id": "test1",
+      "user_password": "Test1234!",
+      "id": 2
+    },
+    {
+      "user_name": "a1234N",
+      "user_id": "a1234",
+      "user_password": "aA1234!@",
+      "id": 3
+    },
+    {
+      "user_name": "TEST112",
+      "user_id": "adfasd1",
+      "user_password": "dfa1A1!@3",
+      "id": 4
+    }
+  ]
+}
