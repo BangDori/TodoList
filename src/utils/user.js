@@ -42,4 +42,31 @@ async function register(form) {
   }
 }
 
-export { login, register };
+async function findUser(search, type) {
+  try {
+    const user = await axios({
+      url: "http://localhost:4000/users",
+      method: "get",
+      responseType: "json",
+    }).then((res) => {
+      let data = undefined;
+      if (type === "name") {
+        data = res.data.filter((u) => u.user_name === search);
+      } else if (type === "id") {
+        data = res.data.filter((u) => u.user_id === search);
+      }
+
+      if (data.length === 0) {
+        throw new Error("아이디가 존재하지 않습니다.");
+      }
+
+      return data;
+    });
+
+    return user;
+  } catch (e) {
+    throw new Error(e.message);
+  }
+}
+
+export { login, register, findUser };
