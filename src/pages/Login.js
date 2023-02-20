@@ -1,41 +1,18 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import LoginBox from "../styles/pages/LoginBox";
 
-const Login = () => {
-  const [form, setForm] = useState({
-    user_id: "",
-    user_password: "",
-  });
-  const { user_id, user_password } = form;
+const Login = ({ loginForm, onChange, onSubmit }) => {
+  const { user_id, user_password } = loginForm;
   const ID = useRef(null);
+  const Message = useRef(null);
 
   useEffect(() => {
     ID.current.focus();
   }, []);
 
-  const onChange = useCallback(
-    (e) => {
-      setForm({
-        ...form,
-        [e.target.name]: e.target.value,
-      });
-    },
-    [form]
-  );
-
-  const onSubmit = (e) => {
-    // 로그인 성공, 실패 시나리오 추가 + 페이지 이동
-    e.preventDefault();
-    setForm({
-      user_id: "",
-      user_password: "",
-    });
-  };
-
   return (
-    <LoginBox action="" method="post">
+    <LoginBox action="" method="post" onSubmit={(e) => onSubmit(e, Message)}>
       <div className="title">Login</div>
-      {/* 화면 진입 시 Input ID를 가리키도록 활성화 필요 */}
       <input
         ref={ID}
         name="user_id"
@@ -44,19 +21,19 @@ const Login = () => {
         placeholder="Input ID"
       />
       <input
+        type="password"
         name="user_password"
         value={user_password}
         onChange={onChange}
         placeholder="Input Password"
       />
-      <button type="submit" onSubmit={onSubmit}>
-        Login
-      </button>
+      <button type="submit">Login</button>
 
       <div className="find">
         <span>아이디 찾기</span>
         <span>비밀번호 찾기</span>
       </div>
+      <p ref={Message}></p>
     </LoginBox>
   );
 };
