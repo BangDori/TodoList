@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 const RegisterBox = styled.form`
+  position: relative;
   text-align: center;
 
   & .title {
@@ -44,6 +45,12 @@ const RegisterBox = styled.form`
 
     margin: 24px 4px 0 4px;
     cursor: pointer;
+  }
+
+  & p {
+    position: absolute;
+    color: red;
+    bottom: -58px;
   }
 `;
 
