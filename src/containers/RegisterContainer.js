@@ -52,6 +52,10 @@ const RegisterContainer = () => {
     } else {
       ID.current.focus();
       Message.current.textContent = "회원가입 정보를 확인해주세요.";
+
+      setTimeout(() => {
+        Message.current.textContent = "";
+      }, 3000);
     }
   };
 

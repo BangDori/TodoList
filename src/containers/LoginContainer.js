@@ -33,6 +33,10 @@ const LoginContainer = ({ onLogin }) => {
       onLogin({ name, status: true });
     } catch (e) {
       message.current.textContent = e.message;
+
+      setTimeout(() => {
+        message.current.textContent = "";
+      }, 3000);
     }
   };
 
