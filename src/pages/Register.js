@@ -5,22 +5,22 @@ import {
   validation,
   validationID,
   validationPWD,
-  validationNickname,
-  register,
-} from "../modules/validation";
+  validationName,
+  checkRegister,
+} from "../utils/register";
+import { register } from "../utils/user";
 
 const Register = () => {
   const navigate = useNavigate();
   const [form, setForm] = useState({
+    user_name: "",
     user_id: "",
     user_password: "",
-    user_nickname: "",
-    done: false,
   });
-  const { user_id, user_password, user_nickname } = form;
+  const { user_id, user_password, user_name } = form;
   const ID = useRef(null);
   const PWD = useRef(null);
-  const Nickname = useRef(null);
+  const Name = useRef(null);
   const Message = useRef(null);
 
   useEffect(() => {
@@ -33,8 +33,8 @@ const Register = () => {
         validation(e.target, ID, validationID);
       } else if (e.target.name === "user_password") {
         validation(e.target, PWD, validationPWD);
-      } else if (e.target.name === "user_nickname") {
-        validation(e.target, Nickname, validationNickname);
+      } else if (e.target.name === "user_name") {
+        validation(e.target, Name, validationName);
       }
 
       setForm({
@@ -45,18 +45,21 @@ const Register = () => {
     [form]
   );
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     // 회원가입 성공, 실패 시나리오 추가 필요 + 페이지 이동
     e.preventDefault();
-    if (register()) {
+    if (checkRegister()) {
+      await register(form);
+
       setForm({
+        user_name: "",
         user_id: "",
         user_password: "",
-        user_nickname: "",
       });
 
       navigate("/");
     } else {
+      ID.current.focus();
       Message.current.textContent = "회원가입 정보를 확인해주세요.";
     }
   };
@@ -80,10 +83,10 @@ const Register = () => {
         onChange={onChange}
       />
       <input
-        ref={Nickname}
-        name="user_nickname"
-        placeholder="Input Nickname"
-        value={user_nickname}
+        ref={Name}
+        name="user_name"
+        placeholder="Input Name"
+        value={user_name}
         onChange={onChange}
       />
 
