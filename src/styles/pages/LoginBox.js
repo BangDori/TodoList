@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const LoginBox = styled.form`
+const LoginBox = styled.div`
   position: relative;
   text-align: center;
 
@@ -33,7 +33,7 @@ const LoginBox = styled.form`
     margin: 8px 0 32px;
   }
 
-  & button {
+  & .login_button {
     width: 144px;
     height: 48px;
     font-size: 12px;
@@ -56,11 +56,15 @@ const LoginBox = styled.form`
     cursor: pointer;
   }
 
-  & .find > span + span {
+  & .find > button {
+    all: unset;
+  }
+
+  & .find > button + button {
     margin-left: 16px;
   }
 
-  & .find > span:hover {
+  & .find > button:hover {
     color: blue;
   }
 

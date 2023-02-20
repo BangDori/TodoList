@@ -11,28 +11,33 @@ const Login = ({ loginForm, onChange, onSubmit }) => {
   }, []);
 
   return (
-    <LoginBox action="" method="post" onSubmit={(e) => onSubmit(e, Message)}>
-      <div className="title">Login</div>
-      <input
-        ref={ID}
-        name="user_id"
-        value={user_id}
-        onChange={onChange}
-        placeholder="Input ID"
-      />
-      <input
-        type="password"
-        name="user_password"
-        value={user_password}
-        onChange={onChange}
-        placeholder="Input Password"
-      />
-      <button type="submit">Login</button>
+    <LoginBox>
+      <form action="" method="post" onSubmit={(e) => onSubmit(e, Message)}>
+        <div className="title">Login</div>
+        <input
+          ref={ID}
+          name="user_id"
+          value={user_id}
+          onChange={onChange}
+          placeholder="Input ID"
+        />
+        <input
+          type="password"
+          name="user_password"
+          value={user_password}
+          onChange={onChange}
+          placeholder="Input Password"
+        />
+        <button className="login_button" type="submit">
+          Login
+        </button>
+      </form>
 
       <div className="find">
-        <span>아이디 찾기</span>
-        <span>비밀번호 찾기</span>
+        <button>아이디 찾기</button>
+        <button>비밀번호 찾기</button>
       </div>
+
       <p ref={Message}></p>
     </LoginBox>
   );
