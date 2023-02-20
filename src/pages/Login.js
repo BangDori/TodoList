@@ -1,10 +1,18 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import LoginBox from "../styles/pages/LoginBox";
+import Modal from "../components/Modal";
 
 const Login = ({ loginForm, onChange, onSubmit }) => {
+  const [modal, setModal] = useState({
+    param: "",
+    visible: false,
+  });
   const { user_id, user_password } = loginForm;
   const ID = useRef(null);
   const Message = useRef(null);
+
+  const show = (param) => setModal({ param, visible: true });
+  const hide = () => setModal({ param: "", visible: false });
 
   useEffect(() => {
     ID.current.focus();
@@ -34,11 +42,14 @@ const Login = ({ loginForm, onChange, onSubmit }) => {
       </form>
 
       <div className="find">
-        <button>아이디 찾기</button>
-        <button>비밀번호 찾기</button>
+        <button onClick={() => show("id")}>아이디 찾기</button>
+        <button onClick={() => show("password")}>비밀번호 찾기</button>
       </div>
 
       <p ref={Message}></p>
+      {modal.visible ? (
+        <Modal subject={modal.param} visible={modal.visible} onHide={hide} />
+      ) : null}
     </LoginBox>
   );
 };
