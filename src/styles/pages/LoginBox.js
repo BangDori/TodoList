@@ -63,6 +63,12 @@ const LoginBox = styled.form`
   & .find > span:hover {
     color: blue;
   }
+
+  & p {
+    position: absolute;
+    color: red;
+    bottom: -96px;
+  }
 `;
 
 export default LoginBox;
