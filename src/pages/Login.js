@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import LoginBox from "../styles/pages/LoginBox";
 
 const Login = () => {
@@ -6,8 +6,12 @@ const Login = () => {
     user_id: "",
     user_password: "",
   });
-
   const { user_id, user_password } = form;
+  const ID = useRef(null);
+
+  useEffect(() => {
+    ID.current.focus();
+  }, []);
 
   const onChange = useCallback(
     (e) => {
@@ -33,6 +37,7 @@ const Login = () => {
       <div className="title">Login</div>
       {/* 화면 진입 시 Input ID를 가리키도록 활성화 필요 */}
       <input
+        ref={ID}
         name="user_id"
         value={user_id}
         onChange={onChange}
