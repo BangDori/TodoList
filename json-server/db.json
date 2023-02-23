@@ -1,0 +1,54 @@
+{
+  "users": [
+    {
+      "user_name": "admin",
+      "user_id": "admin",
+      "user_password": "1234",
+      "id": 1
+    },
+    {
+      "user_name": "test",
+      "user_id": "test",
+      "user_password": "1234",
+      "id": 2
+    },
+    {
+      "user_name": "t",
+      "user_id": "1",
+      "user_password": "1",
+      "id": 3
+    }
+  ],
+  "admin": [
+    {
+      "id": 1,
+      "text": "admin todo 1",
+      "checked": true
+    },
+    {
+      "id": 2,
+      "text": "admin todo 2",
+      "checked": false
+    },
+    {
+      "id": 3,
+      "text": "admin todo 3",
+      "checked": false
+    }
+  ],
+  "test": [
+    {
+      "id": 1,
+      "text": "test todo 1",
+      "checked": false
+    },
+    {
+      "id": 2,
+      "text": "test todo 2",
+      "checked": false
+    }
+  ],
+  "t": [
+
+  ]
+}
