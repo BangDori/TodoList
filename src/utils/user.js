@@ -18,7 +18,7 @@ async function login({ user_id, user_password }) {
       })
       .then((user) => {
         if (user[0].user_password === user_password) {
-          return user[0].user_name;
+          return user;
         } else {
           throw new Error("비밀번호가 일치하지 않습니다.");
         }
@@ -30,12 +30,22 @@ async function login({ user_id, user_password }) {
   }
 }
 
-async function register(form) {
+async function register(form, id) {
+  const todosForm = {
+    id: id,
+    todos: [],
+  };
   try {
     await axios({
       url: "http://localhost:4000/users",
       method: "post",
       data: form,
+    });
+
+    await axios({
+      url: "http://localhost:4000/todos",
+      method: "post",
+      data: todosForm,
     });
   } catch (e) {
     console.log("Error: " + e.message);
