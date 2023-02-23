@@ -5,6 +5,7 @@ import Box from "./styles/Box";
 
 const App = () => {
   const [isLogin, setIsLogin] = useState({
+    id: "",
     name: "",
     status: false,
   });
