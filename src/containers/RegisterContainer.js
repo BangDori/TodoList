@@ -1,5 +1,5 @@
 import Register from "../pages/Register";
-import { useCallback, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { register } from "../utils/user";
 import {
@@ -17,6 +17,7 @@ const RegisterContainer = () => {
     user_id: "",
     user_password: "",
   });
+  const id = useRef(3);
 
   const onChange = useCallback(
     (e, ref) => {
@@ -40,8 +41,9 @@ const RegisterContainer = () => {
     // 회원가입 성공, 실패 시나리오 추가 필요 + 페이지 이동
     e.preventDefault();
     if (checkRegister()) {
-      await register(form);
+      await register(form, id.current);
 
+      id.current += 1;
       setForm({
         user_name: "",
         user_id: "",
