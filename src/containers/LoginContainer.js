@@ -23,14 +23,14 @@ const LoginContainer = ({ onLogin }) => {
     e.preventDefault();
 
     try {
-      const name = await login(form);
+      const user = await login(form);
 
       setForm({
         user_id: "",
         user_password: "",
       });
 
-      onLogin({ name, status: true });
+      onLogin({ id: user[0].id, name: user[0].user_name, status: true });
     } catch (e) {
       message.current.textContent = e.message;
 
