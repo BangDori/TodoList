@@ -27,7 +27,12 @@ const Menu = ({ isLogin }) => {
           </li>
           <li>
             {isLogin.status ? (
-              <Link to="/logout">Logout</Link>
+              <Link
+                to="/logout"
+                className={cn({ selected: pathname === "/logout" })}
+              >
+                Logout
+              </Link>
             ) : (
               <Link
                 to="/login"
