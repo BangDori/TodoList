@@ -1,15 +1,19 @@
 import styled from "styled-components";
 
 const TodosBox = styled.div`
-  text-align: center;
+  width: 360px;
+  border-radius: 4px;
+  overflow: hidden;
 
-  & .default-todos {
-    color: red;
-  }
+  .app-title {
+    background: #22b8cf;
+    color: white;
+    height: 4rem;
+    font-size: 1.5rem;
 
-  & .title {
-    font-size: 24px;
-    color: #95bdff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 `;
 
