@@ -15,7 +15,7 @@ npm install
 npm run start
 ```
 
-3. 프론트와 통신하기 위해 json-server를 열어줍니다.
+3. 프론트 서버와의 통신을 위해 json-server를 열어줍니다.
 ```
 npx json-server json-server/db.json --port 4000
 ```
