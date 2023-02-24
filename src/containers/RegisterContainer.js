@@ -1,7 +1,7 @@
 import Register from "../pages/Register";
 import { useCallback, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { register } from "../utils/user";
+import { register } from "../services/user";
 import {
   validation,
   validationID,

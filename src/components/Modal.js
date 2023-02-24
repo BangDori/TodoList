@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 import ModalBox from "../styles/pages/Modal";
 import "rodal/lib/rodal.css";
 import Rodal from "rodal";
-import { findUser } from "../utils/user";
+import { findUser } from "../services/user";
 
 const Modal = ({ subject, visible, onHide }) => {
   const [name, setName] = useState("");

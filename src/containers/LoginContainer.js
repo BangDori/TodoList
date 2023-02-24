@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 import Login from "../pages/Login";
-import { login } from "../utils/user";
+import { login } from "../services/user";
 
 const LoginContainer = ({ onLogin }) => {
   const [form, setForm] = useState({
