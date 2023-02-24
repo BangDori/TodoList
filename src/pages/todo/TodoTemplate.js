@@ -1,7 +1,6 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState, useReducer, useEffect } from 'react';
 import TodosBox from '../../styles/pages/TodosBox';
 import {
-  getTodoList,
   getTot,
   insertTodoList,
   removeTodoList,
@@ -10,63 +9,76 @@ import {
 import TodoInsert from './TodoInsert';
 import TodoList from './TodoList';
 
+function reducer(todos, action) {
+  switch (action.type) {
+    case 'SET_DATA':
+      return action.data;
+    case 'INSERT':
+      return [...todos, action.todo];
+    case 'UPDATE':
+      return todos.map((todo) => {
+        return todo.id === action.id
+          ? { ...todo, checked: !todo.checked }
+          : todo;
+      });
+    case 'DELETE':
+      return todos.filter((todo) => todo.id !== action.id);
+    default:
+      return todos;
+  }
+}
+
+async function fetchTodos(name) {
+  return await fetch(`http://localhost:4000/todos?user_name=${name}`)
+    .then((res) => res.json())
+    .then((data) => data);
+}
+
 const TodoTemplate = ({ isLogin }) => {
-  const [todos, setTodos] = useState(undefined);
+  const [isLoading, setIsLoading] = useState(true);
+  const [todos, dispatch] = useReducer(reducer, {});
 
   useEffect(() => {
-    const TodoList = async () => {
-      try {
-        const list = await getTodoList(isLogin.name);
-        setTodos(list);
-      } catch (e) {
-        console.log(e);
-      }
-    };
-
-    TodoList();
+    fetchTodos(isLogin.name).then((data) => {
+      dispatch({ type: 'SET_DATA', data });
+      setIsLoading(false);
+    });
   }, [isLogin]);
 
   const onInsert = useCallback(
     async (text) => {
       const id = await getTot();
 
-      const nextTodo = {
+      const todo = {
         id: id,
         user_name: isLogin.name,
         text,
         checked: false,
       };
 
-      await insertTodoList(nextTodo);
-      setTodos(todos.concat(nextTodo));
+      dispatch({ type: 'INSERT', todo });
+      insertTodoList(todo);
     },
-    [isLogin, todos],
+    [isLogin],
   );
 
   const onToggle = useCallback(
     async (id) => {
-      const nextTodos = todos.map((todo) =>
-        todo.id === id ? { ...todo, checked: !todo.checked } : todo,
-      );
+      const [todo] = todos.filter((t) => t.id === id);
 
-      updateTodoList(id, todos[id - 1]);
-      setTodos(nextTodos);
+      dispatch({ type: 'UPDATE', id });
+      updateTodoList(id, todo);
     },
     [todos],
   );
 
-  const onRemove = useCallback(
-    async (id) => {
-      const nextTodos = todos.filter((todo) => todo.id !== id);
+  const onRemove = useCallback(async (id) => {
+    dispatch({ type: 'DELETE', id });
+    removeTodoList(id);
+  }, []);
 
-      removeTodoList(id);
-      setTodos(nextTodos);
-    },
-    [todos],
-  );
-
-  if (todos === undefined) {
-    return <h3 style={{ color: 'red' }}>서버와의 연결이 끊어졌습니다.</h3>;
+  if (isLoading) {
+    return <h3>Loading...</h3>;
   }
 
   return (
