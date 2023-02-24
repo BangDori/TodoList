@@ -30,22 +30,12 @@ async function login({ user_id, user_password }) {
   }
 }
 
-async function register(form, id) {
-  const todosForm = {
-    id: id,
-    todos: [],
-  };
+async function register(form) {
   try {
     await axios({
       url: 'http://localhost:4000/users',
       method: 'post',
       data: form,
-    });
-
-    await axios({
-      url: 'http://localhost:4000/todos',
-      method: 'post',
-      data: todosForm,
     });
   } catch (e) {
     console.log('Error: ' + e.message);
