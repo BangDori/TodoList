@@ -1,31 +1,31 @@
-import Register from "../pages/Register";
-import { useCallback, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { register } from "../services/user";
+import Register from '../pages/Register';
+import { useCallback, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { register } from '../services/user';
 import {
   validation,
   validationID,
   validationPWD,
   validationName,
   checkRegister,
-} from "../utils/register";
+} from '../utils/register';
 
 const RegisterContainer = () => {
   const navigate = useNavigate();
   const [form, setForm] = useState({
-    user_name: "",
-    user_id: "",
-    user_password: "",
+    user_name: '',
+    user_id: '',
+    user_password: '',
   });
   const id = useRef(3);
 
   const onChange = useCallback(
     (e, ref) => {
-      if (e.target.name === "user_id") {
+      if (e.target.name === 'user_id') {
         validation(e.target, ref, validationID);
-      } else if (e.target.name === "user_password") {
+      } else if (e.target.name === 'user_password') {
         validation(e.target, ref, validationPWD);
-      } else if (e.target.name === "user_name") {
+      } else if (e.target.name === 'user_name') {
         validation(e.target, ref, validationName);
       }
 
@@ -34,7 +34,7 @@ const RegisterContainer = () => {
         [e.target.name]: e.target.value,
       });
     },
-    [form]
+    [form],
   );
 
   const onSubmit = async (e, ID, Message) => {
@@ -45,18 +45,18 @@ const RegisterContainer = () => {
 
       id.current += 1;
       setForm({
-        user_name: "",
-        user_id: "",
-        user_password: "",
+        user_name: '',
+        user_id: '',
+        user_password: '',
       });
 
-      navigate("/");
+      navigate('/');
     } else {
       ID.current.focus();
-      Message.current.textContent = "회원가입 정보를 확인해주세요.";
+      Message.current.textContent = '회원가입 정보를 확인해주세요.';
 
       setTimeout(() => {
-        Message.current.textContent = "";
+        Message.current.textContent = '';
       }, 3000);
     }
   };

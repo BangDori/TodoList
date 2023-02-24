@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import styled from "styled-components";
+import React, { useState } from 'react';
+import styled from 'styled-components';
 
 const TodoInsertBox = styled.form`
   display: flex;
@@ -41,7 +41,7 @@ const TodoInsertBox = styled.form`
 `;
 
 const TodoInsert = ({ insert }) => {
-  const [todo, setTodo] = useState("");
+  const [todo, setTodo] = useState('');
 
   const onChange = (e) => {
     setTodo(e.target.value);
@@ -50,18 +50,18 @@ const TodoInsert = ({ insert }) => {
     e.preventDefault();
 
     insert(todo);
-    setTodo("");
+    setTodo('');
   };
 
   return (
-    <TodoInsertBox onSubmit={onSubmit} method="post" action="">
+    <TodoInsertBox onSubmit={onSubmit} method='post' action=''>
       <input
-        name="todo"
+        name='todo'
         value={todo}
         onChange={onChange}
-        placeholder="Input todo"
+        placeholder='Input todo'
       />
-      <button type="submit">Add</button>
+      <button type='submit'>Add</button>
     </TodoInsertBox>
   );
 };

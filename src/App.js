@@ -1,12 +1,12 @@
-import { useState } from "react";
-import Menu from "./components/Menu";
-import ContentList from "./pages/ContentList";
-import Box from "./styles/Box";
+import { useState } from 'react';
+import Menu from './components/Menu';
+import ContentList from './pages/ContentList';
+import Box from './styles/Box';
 
 const App = () => {
   const [isLogin, setIsLogin] = useState({
-    id: "",
-    name: "",
+    id: '',
+    name: '',
     status: false,
   });
 

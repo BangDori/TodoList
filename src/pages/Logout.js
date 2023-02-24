@@ -1,10 +1,10 @@
-import React from "react";
-import LogoutBox from "../styles/pages/LogoutBox";
+import React from 'react';
+import LogoutBox from '../styles/pages/LogoutBox';
 
 const Logout = ({ onLogout }) => {
   return (
     <LogoutBox>
-      <button onClick={() => onLogout({ name: "", status: false })}>
+      <button onClick={() => onLogout({ name: '', status: false })}>
         Logout
       </button>
     </LogoutBox>

@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from "react";
-import RegisterBox from "../styles/pages/RegisterBox";
+import React, { useEffect, useRef } from 'react';
+import RegisterBox from '../styles/pages/RegisterBox';
 
 const Register = ({ registerForm, onChange, onSubmit }) => {
   const { user_id, user_password, user_name } = registerForm;
@@ -14,36 +14,36 @@ const Register = ({ registerForm, onChange, onSubmit }) => {
 
   return (
     <RegisterBox
-      action=""
-      method="post"
+      action=''
+      method='post'
       onSubmit={(e) => onSubmit(e, ID, Message)}
     >
-      <div className="title">Register</div>
+      <div className='title'>Register</div>
       {/* 화면 진입 시 Input ID를 가리키도록 활성화 필요 */}
       <input
         ref={ID}
-        name="user_id"
-        placeholder="Input ID"
+        name='user_id'
+        placeholder='Input ID'
         value={user_id}
         onChange={(e) => onChange(e, ID)}
       />
       <input
         ref={PWD}
-        type="password"
-        name="user_password"
-        placeholder="Input Password"
+        type='password'
+        name='user_password'
+        placeholder='Input Password'
         value={user_password}
         onChange={(e) => onChange(e, PWD)}
       />
       <input
         ref={Name}
-        name="user_name"
-        placeholder="Input Name"
+        name='user_name'
+        placeholder='Input Name'
         value={user_name}
         onChange={(e) => onChange(e, Name)}
       />
 
-      <button type="submit">Submit</button>
+      <button type='submit'>Submit</button>
       <p ref={Message}></p>
     </RegisterBox>
   );

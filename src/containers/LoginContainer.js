@@ -1,11 +1,11 @@
-import { useCallback, useState } from "react";
-import Login from "../pages/Login";
-import { login } from "../services/user";
+import { useCallback, useState } from 'react';
+import Login from '../pages/Login';
+import { login } from '../services/user';
 
 const LoginContainer = ({ onLogin }) => {
   const [form, setForm] = useState({
-    user_id: "",
-    user_password: "",
+    user_id: '',
+    user_password: '',
   });
 
   const onChange = useCallback(
@@ -15,7 +15,7 @@ const LoginContainer = ({ onLogin }) => {
         [e.target.name]: e.target.value,
       });
     },
-    [form]
+    [form],
   );
 
   const onSubmit = async (e, message) => {
@@ -26,8 +26,8 @@ const LoginContainer = ({ onLogin }) => {
       const user = await login(form);
 
       setForm({
-        user_id: "",
-        user_password: "",
+        user_id: '',
+        user_password: '',
       });
 
       onLogin({ id: user[0].id, name: user[0].user_name, status: true });
@@ -35,7 +35,7 @@ const LoginContainer = ({ onLogin }) => {
       message.current.textContent = e.message;
 
       setTimeout(() => {
-        message.current.textContent = "";
+        message.current.textContent = '';
       }, 3000);
     }
   };

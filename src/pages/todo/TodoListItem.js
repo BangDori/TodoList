@@ -1,11 +1,11 @@
-import React from "react";
-import styled from "styled-components";
-import cn from "classnames";
+import React from 'react';
+import styled from 'styled-components';
+import cn from 'classnames';
 import {
   MdCheckBoxOutlineBlank,
   MdCheckBox,
   MdRemoveCircleOutline,
-} from "react-icons/md";
+} from 'react-icons/md';
 
 const TodoListItemBox = styled.div`
   padding: 0.5rem !important;
@@ -65,11 +65,11 @@ const TodoListItem = ({ todo, onToggle, onRemove }) => {
 
   return (
     <TodoListItemBox>
-      <div className={cn("checkbox", { checked })} onClick={() => onToggle(id)}>
+      <div className={cn('checkbox', { checked })} onClick={() => onToggle(id)}>
         {checked ? <MdCheckBox /> : <MdCheckBoxOutlineBlank />}
-        <div className="text"> {text}</div>
+        <div className='text'> {text}</div>
       </div>
-      <div className="remove" onClick={() => onRemove(id)}>
+      <div className='remove' onClick={() => onRemove(id)}>
         <MdRemoveCircleOutline />
       </div>
     </TodoListItemBox>

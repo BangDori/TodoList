@@ -1,14 +1,14 @@
-import { useEffect, useState } from "react";
-import TodosBox from "../../styles/pages/TodosBox";
+import { useEffect, useState } from 'react';
+import TodosBox from '../../styles/pages/TodosBox';
 import {
   getTodoList,
   insertTodoList,
   removeTodoList,
   updateTodoList,
-} from "../../services/todo";
+} from '../../services/todo';
 // import { getTodoList } from "../../utils/todo";
-import TodoInsert from "./TodoInsert";
-import TodoList from "./TodoList";
+import TodoInsert from './TodoInsert';
+import TodoList from './TodoList';
 
 const TodoTemplate = ({ isLogin }) => {
   const [todos, setTodos] = useState([]);
@@ -39,7 +39,7 @@ const TodoTemplate = ({ isLogin }) => {
 
   const onToggle = async (id) => {
     const nextTodos = todos.map((todo) =>
-      todo.id === id ? { ...todo, checked: !todo.checked } : todo
+      todo.id === id ? { ...todo, checked: !todo.checked } : todo,
     );
 
     updateTodoList(isLogin.name, id, todos[id - 1]);
@@ -55,8 +55,8 @@ const TodoTemplate = ({ isLogin }) => {
 
   return (
     <TodosBox>
-      <div className="todo_container">
-        <div className="app-title">Todo List</div>
+      <div className='todo_container'>
+        <div className='app-title'>Todo List</div>
         <TodoInsert insert={insertTodo} />
         <TodoList todos={todos} onToggle={onToggle} onRemove={onRemove} />
       </div>

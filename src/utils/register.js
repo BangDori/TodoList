@@ -1,4 +1,4 @@
-import { regExpID, regExpPW, regExpName, patternSpec } from "./regExp";
+import { regExpID, regExpPW, regExpName, patternSpec } from './regExp';
 
 const status = {
   name_done: false,
@@ -20,12 +20,12 @@ function checkRegister() {
 }
 
 function validation({ value }, ref, callback) {
-  if (value === "") {
-    ref.current.style = "outline: none";
+  if (value === '') {
+    ref.current.style = 'outline: none';
   } else if (callback(value)) {
-    ref.current.style = "outline: 3px solid #80ff00";
+    ref.current.style = 'outline: 3px solid #80ff00';
   } else {
-    ref.current.style = "outline: 3px solid #ff0000";
+    ref.current.style = 'outline: 3px solid #ff0000';
   }
 }
 
