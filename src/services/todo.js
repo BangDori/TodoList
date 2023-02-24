@@ -3,7 +3,7 @@ import axios from 'axios';
 export async function getTodoList(name) {
   try {
     const todoList = await axios({
-      url: `http://localhost:4000/${name}`,
+      url: `http://localhost:4000/todos?user_name=${name}`,
       method: 'get',
       responseType: 'json',
     }).then((result) => {
@@ -13,25 +13,43 @@ export async function getTodoList(name) {
     return todoList;
   } catch (e) {
     console.log(e);
+
+    return [];
   }
 }
 
-export async function insertTodoList(name, nextTodos) {
+export async function getTot() {
+  try {
+    const tot = await axios({
+      url: 'http://localhost:4000/todos',
+      method: 'get',
+    }).then((result) => {
+      if (result.data.length === 0) return 1;
+      return result.data[result.data.length - 1].id + 1;
+    });
+
+    return tot;
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+export async function insertTodoList(nextTodo) {
   try {
     await axios({
-      url: `http://localhost:4000/${name}`,
+      url: 'http://localhost:4000/todos',
       method: 'post',
-      data: nextTodos,
+      data: nextTodo,
     });
   } catch (e) {
     console.log(e);
   }
 }
 
-export async function updateTodoList(name, id, todo) {
+export async function updateTodoList(id, todo) {
   try {
     await axios({
-      url: `http://localhost:4000/${name}/${id}`,
+      url: `http://localhost:4000/todos/${id}`,
       method: 'patch',
       data: { ...todo, checked: !todo.checked },
     });
@@ -40,10 +58,10 @@ export async function updateTodoList(name, id, todo) {
   }
 }
 
-export async function removeTodoList(name, id) {
+export async function removeTodoList(id) {
   try {
     await axios({
-      url: `http://localhost:4000/${name}/${id}`,
+      url: `http://localhost:4000/todos/${id}`,
       method: 'delete',
     });
   } catch (e) {
