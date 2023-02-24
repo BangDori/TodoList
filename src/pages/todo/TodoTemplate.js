@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 import TodosBox from '../../styles/pages/TodosBox';
 import {
   getTodoList,
+  getTot,
   insertTodoList,
   removeTodoList,
   updateTodoList,
@@ -10,7 +11,7 @@ import TodoInsert from './TodoInsert';
 import TodoList from './TodoList';
 
 const TodoTemplate = ({ isLogin }) => {
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState(undefined);
 
   useEffect(() => {
     const TodoList = async () => {
@@ -27,14 +28,17 @@ const TodoTemplate = ({ isLogin }) => {
 
   const onInsert = useCallback(
     async (text) => {
-      const nextTodos = {
-        id: todos.length + 1,
+      const id = await getTot();
+
+      const nextTodo = {
+        id: id,
+        user_name: isLogin.name,
         text,
         checked: false,
       };
 
-      insertTodoList(isLogin.name, nextTodos);
-      setTodos(todos.concat(nextTodos));
+      await insertTodoList(nextTodo);
+      setTodos(todos.concat(nextTodo));
     },
     [isLogin, todos],
   );
@@ -45,27 +49,32 @@ const TodoTemplate = ({ isLogin }) => {
         todo.id === id ? { ...todo, checked: !todo.checked } : todo,
       );
 
-      updateTodoList(isLogin.name, id, todos[id - 1]);
+      updateTodoList(id, todos[id - 1]);
       setTodos(nextTodos);
     },
-    [isLogin, todos],
+    [todos],
   );
 
   const onRemove = useCallback(
     async (id) => {
       const nextTodos = todos.filter((todo) => todo.id !== id);
 
-      removeTodoList(isLogin.name, id);
+      removeTodoList(id);
       setTodos(nextTodos);
     },
-    [isLogin, todos],
+    [todos],
   );
+
+  if (todos === undefined) {
+    return <h3 style={{ color: 'red' }}>서버와의 연결이 끊어졌습니다.</h3>;
+  }
 
   return (
     <TodosBox>
       <div className='todo_container'>
         <div className='app-title'>Todo List</div>
         <TodoInsert onInsert={onInsert} />
+
         <TodoList todos={todos} onToggle={onToggle} onRemove={onRemove} />
       </div>
     </TodosBox>
