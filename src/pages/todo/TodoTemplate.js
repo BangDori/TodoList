@@ -1,7 +1,6 @@
 import { useCallback, useState, useReducer, useEffect } from 'react';
 import TodosBox from '../../styles/pages/TodosBox';
 import {
-  getTodoList,
   getTot,
   insertTodoList,
   removeTodoList,
@@ -63,9 +62,15 @@ const TodoTemplate = ({ isLogin }) => {
     [isLogin],
   );
 
-  const onToggle = useCallback(async (id) => {
-    dispatch({ type: 'UPDATE', id });
-  }, []);
+  const onToggle = useCallback(
+    async (id) => {
+      const [todo] = todos.filter((t) => t.id === id);
+
+      dispatch({ type: 'UPDATE', id });
+      updateTodoList(id, todo);
+    },
+    [todos],
+  );
 
   const onRemove = useCallback(async (id) => {
     dispatch({ type: 'DELETE', id });
