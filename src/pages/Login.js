@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import LoginBox from '../styles/pages/LoginBox';
 import Modal from '../components/Modal';
 
@@ -11,8 +11,8 @@ const Login = ({ loginForm, onChange, onSubmit }) => {
   const ID = useRef(null);
   const Message = useRef(null);
 
-  const show = (param) => setModal({ param, visible: true });
-  const hide = () => setModal({ param: '', visible: false });
+  const show = useCallback((param) => setModal({ param, visible: true }), []);
+  const hide = useCallback(() => setModal({ param: '', visible: false }), []);
 
   useEffect(() => {
     ID.current.focus();

@@ -38,7 +38,6 @@ const RegisterContainer = () => {
   );
 
   const onSubmit = async (e, ID, Message) => {
-    // 회원가입 성공, 실패 시나리오 추가 필요 + 페이지 이동
     e.preventDefault();
     if (checkRegister()) {
       await register(form, id.current);

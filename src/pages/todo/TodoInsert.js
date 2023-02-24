@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import styled from 'styled-components';
 
 const TodoInsertBox = styled.form`
@@ -40,18 +40,22 @@ const TodoInsertBox = styled.form`
   }
 `;
 
-const TodoInsert = ({ insert }) => {
+const TodoInsert = ({ onInsert }) => {
   const [todo, setTodo] = useState('');
 
-  const onChange = (e) => {
+  const onChange = useCallback((e) => {
     setTodo(e.target.value);
-  };
-  const onSubmit = (e) => {
-    e.preventDefault();
+  }, []);
 
-    insert(todo);
-    setTodo('');
-  };
+  const onSubmit = useCallback(
+    (e) => {
+      e.preventDefault();
+
+      onInsert(todo);
+      setTodo('');
+    },
+    [onInsert, todo],
+  );
 
   return (
     <TodoInsertBox onSubmit={onSubmit} method='post' action=''>

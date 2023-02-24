@@ -1,8 +1,7 @@
-import React from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import Home from './Home';
-import RegisterContainer from '../containers/RegisterContainer';
-import LoginContainer from '../containers/LoginContainer';
+import RegisterContainer from './RegisterContainer';
+import LoginContainer from './LoginContainer';
 import Todos from './Todos';
 import ListBox from '../styles/pages/ListBox';
 import Logout from './Logout';

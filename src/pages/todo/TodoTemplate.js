@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import TodosBox from '../../styles/pages/TodosBox';
 import {
   getTodoList,
@@ -6,7 +6,6 @@ import {
   removeTodoList,
   updateTodoList,
 } from '../../services/todo';
-// import { getTodoList } from "../../utils/todo";
 import TodoInsert from './TodoInsert';
 import TodoList from './TodoList';
 
@@ -26,38 +25,47 @@ const TodoTemplate = ({ isLogin }) => {
     TodoList();
   }, [isLogin]);
 
-  const insertTodo = async (text) => {
-    const nextTodos = {
-      id: todos.length + 1,
-      text,
-      checked: false,
-    };
+  const onInsert = useCallback(
+    async (text) => {
+      const nextTodos = {
+        id: todos.length + 1,
+        text,
+        checked: false,
+      };
 
-    insertTodoList(isLogin.name, nextTodos);
-    setTodos(todos.concat(nextTodos));
-  };
+      insertTodoList(isLogin.name, nextTodos);
+      setTodos(todos.concat(nextTodos));
+    },
+    [isLogin, todos],
+  );
 
-  const onToggle = async (id) => {
-    const nextTodos = todos.map((todo) =>
-      todo.id === id ? { ...todo, checked: !todo.checked } : todo,
-    );
+  const onToggle = useCallback(
+    async (id) => {
+      const nextTodos = todos.map((todo) =>
+        todo.id === id ? { ...todo, checked: !todo.checked } : todo,
+      );
 
-    updateTodoList(isLogin.name, id, todos[id - 1]);
-    setTodos(nextTodos);
-  };
+      updateTodoList(isLogin.name, id, todos[id - 1]);
+      setTodos(nextTodos);
+    },
+    [isLogin, todos],
+  );
 
-  const onRemove = async (id) => {
-    const nextTodos = todos.filter((todo) => todo.id !== id);
+  const onRemove = useCallback(
+    async (id) => {
+      const nextTodos = todos.filter((todo) => todo.id !== id);
 
-    removeTodoList(isLogin.name, id);
-    setTodos(nextTodos);
-  };
+      removeTodoList(isLogin.name, id);
+      setTodos(nextTodos);
+    },
+    [isLogin, todos],
+  );
 
   return (
     <TodosBox>
       <div className='todo_container'>
         <div className='app-title'>Todo List</div>
-        <TodoInsert insert={insertTodo} />
+        <TodoInsert onInsert={onInsert} />
         <TodoList todos={todos} onToggle={onToggle} onRemove={onRemove} />
       </div>
     </TodosBox>

@@ -19,7 +19,6 @@ const LoginContainer = ({ onLogin }) => {
   );
 
   const onSubmit = async (e, message) => {
-    // 로그인 성공, 실패 시나리오 추가 + 페이지 이동
     e.preventDefault();
 
     try {
