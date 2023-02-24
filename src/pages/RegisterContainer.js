@@ -40,7 +40,7 @@ const RegisterContainer = () => {
   const onSubmit = async (e, ID, Message) => {
     e.preventDefault();
     if (checkRegister()) {
-      await register(form, id.current);
+      await register(form);
 
       id.current += 1;
       setForm({
