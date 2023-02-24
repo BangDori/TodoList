@@ -23,10 +23,11 @@ export async function getTot() {
     const tot = await axios({
       url: 'http://localhost:4000/todos',
       method: 'get',
-    }).then((result) => {
-      if (result.data.length === 0) return 1;
-      return result.data[result.data.length - 1].id + 1;
-    });
+    }).then((result) =>
+      result.data.length === 0
+        ? 0
+        : Number(result.data[result.data.length - 1].id) + 1,
+    );
 
     return tot;
   } catch (e) {
@@ -34,12 +35,12 @@ export async function getTot() {
   }
 }
 
-export async function insertTodoList(nextTodo) {
+export async function insertTodoList(todo) {
   try {
     await axios({
       url: 'http://localhost:4000/todos',
       method: 'post',
-      data: nextTodo,
+      data: todo,
     });
   } catch (e) {
     console.log(e);

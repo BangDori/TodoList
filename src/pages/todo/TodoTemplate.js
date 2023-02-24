@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useReducer, useRef } from 'react';
+import { useCallback, useState, useReducer, useEffect } from 'react';
 import TodosBox from '../../styles/pages/TodosBox';
 import {
   getTodoList,
@@ -12,6 +12,8 @@ import TodoList from './TodoList';
 
 function reducer(todos, action) {
   switch (action.type) {
+    case 'SET_DATA':
+      return action.data;
     case 'INSERT':
       return [...todos, action.todo];
     case 'UPDATE':
@@ -27,35 +29,36 @@ function reducer(todos, action) {
   }
 }
 
+async function fetchTodos(name) {
+  return await fetch(`http://localhost:4000/todos?user_name=${name}`)
+    .then((res) => res.json())
+    .then((data) => data);
+}
+
 const TodoTemplate = ({ isLogin }) => {
-  const [todos, dispatch] = useReducer(reducer, []);
-  const id = useRef(1);
+  const [isLoading, setIsLoading] = useState(true);
+  const [todos, dispatch] = useReducer(reducer, {});
 
   useEffect(() => {
-    const TodoList = async () => {
-      try {
-        const list = await getTodoList(isLogin.name);
-
-        if (list.length !== 0) dispatch({ type: 'INSERT', list });
-      } catch (e) {
-        console.log(e);
-      }
-    };
-
-    TodoList();
+    fetchTodos(isLogin.name).then((data) => {
+      dispatch({ type: 'SET_DATA', data });
+      setIsLoading(false);
+    });
   }, [isLogin]);
 
   const onInsert = useCallback(
     async (text) => {
+      const id = await getTot();
+
       const todo = {
-        id: id.current,
+        id: id,
         user_name: isLogin.name,
         text,
         checked: false,
       };
 
-      id.current += 1;
       dispatch({ type: 'INSERT', todo });
+      insertTodoList(todo);
     },
     [isLogin],
   );
@@ -66,10 +69,11 @@ const TodoTemplate = ({ isLogin }) => {
 
   const onRemove = useCallback(async (id) => {
     dispatch({ type: 'DELETE', id });
+    removeTodoList(id);
   }, []);
 
-  if (todos === undefined) {
-    return <h3 style={{ color: 'red' }}>서버와의 연결이 끊어졌습니다.</h3>;
+  if (isLoading) {
+    return <h3>Loading...</h3>;
   }
 
   return (
