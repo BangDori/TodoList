@@ -5,7 +5,7 @@ import {
   insertTodoList,
   removeTodoList,
   updateTodoList,
-} from "../../utils/todo";
+} from "../../services/todo";
 // import { getTodoList } from "../../utils/todo";
 import TodoInsert from "./TodoInsert";
 import TodoList from "./TodoList";
