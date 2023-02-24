@@ -10,11 +10,6 @@ function getDate() {
 }
 
 export async function useTimer({ clock }) {
-  // clock.current.textContent = `${getDate().hour}:${getDate().minute}:${
-  //   getDate().second
-  // })
-  // }`;
-
   useEffect(() => {
     let intervalClock = setInterval(() => {
       const { hour, minute, second } = getDate();
