@@ -14,13 +14,11 @@ function reducer(todos, action) {
     case 'SET_DATA':
       return action.data;
     case 'INSERT':
-      return [...todos, action.todo];
+      return todos.concat(action.todo);
     case 'UPDATE':
-      return todos.map((todo) => {
-        return todo.id === action.id
-          ? { ...todo, checked: !todo.checked }
-          : todo;
-      });
+      return todos.map((todo) =>
+        todo.id === action.id ? { ...todo, checked: !todo.checked } : todo,
+      );
     case 'DELETE':
       return todos.filter((todo) => todo.id !== action.id);
     default:
