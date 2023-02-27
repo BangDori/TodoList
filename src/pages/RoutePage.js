@@ -5,6 +5,7 @@ import RegisterIndex from './register/IndexContainer';
 import LoginIndex from './login/IndexContainer';
 import LogoutIndex from './logout/Index';
 import TodoIndex from './todo/Index';
+import NotFound from './NotFound';
 
 const RoutePage = ({ isLogin, onLogin }) => {
   const navigate = useNavigate();
@@ -25,6 +26,7 @@ const RoutePage = ({ isLogin, onLogin }) => {
           <Route path='/login' element={<LoginIndex onLogin={onClick} />} />
         )}
         <Route path='/todos' element={<TodoIndex isLogin={isLogin} />} />
+        <Route path='/*' element={<NotFound />} />
       </Routes>
     </ListBox>
   );
