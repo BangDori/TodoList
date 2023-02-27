@@ -33,14 +33,23 @@ async function fetchTodos(name) {
 }
 
 const TodoTemplate = ({ isLogin }) => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [todos, dispatch] = useReducer(reducer, {});
+  const [isLoading, setIsLoading] = useState(false);
+  const [todos, dispatch] = useReducer(reducer, null);
 
   useEffect(() => {
-    fetchTodos(isLogin.name).then((data) => {
-      dispatch({ type: 'SET_DATA', data });
+    const fetchData = async () => {
+      setIsLoading(true);
+      try {
+        await fetchTodos(isLogin.name).then((data) => {
+          dispatch({ type: 'SET_DATA', data });
+        });
+      } catch (e) {
+        console.log(e);
+      }
+
       setIsLoading(false);
-    });
+    };
+    fetchData();
   }, [isLogin]);
 
   const onInsert = useCallback(
@@ -77,6 +86,10 @@ const TodoTemplate = ({ isLogin }) => {
 
   if (isLoading) {
     return <h3>Loading...</h3>;
+  }
+
+  if (!todos) {
+    return null;
   }
 
   return (
