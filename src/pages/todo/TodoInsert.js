@@ -40,6 +40,7 @@ const TodoInsertBox = styled.form`
   }
 `;
 
+// 데이터 추가 View
 const TodoInsert = ({ onInsert }) => {
   const [todo, setTodo] = useState('');
 

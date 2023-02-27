@@ -1,5 +1,10 @@
 import axios from 'axios';
 
+/**
+ * users table에 회원 정보가 존재하는지 조회
+ * @param {*} param0 유저 아이디, 유저 비밀번호
+ * @returns 유저 정보 or 에러 메시지
+ */
 async function login({ user_id, user_password }) {
   try {
     const isLogin = await axios({
@@ -30,6 +35,10 @@ async function login({ user_id, user_password }) {
   }
 }
 
+/**
+ * use table에 회원 정보 등록
+ * @param {*} form 유저 이름, 아이디, 비밀번호
+ */
 async function register(form) {
   try {
     await axios({
@@ -42,6 +51,12 @@ async function register(form) {
   }
 }
 
+/**
+ * users table에 회원 정보가 존재하는지 조회
+ * @param {*} search 입력 정보 (이름 or 아이디)
+ * @param {*} type 검색하려는 타입 구분(아이디 or 비밀번호)
+ * @returns 유저의 아이디 or 유저의 비밀번호
+ */
 async function findUser(search, type) {
   try {
     const user = await axios({

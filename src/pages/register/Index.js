@@ -20,7 +20,6 @@ const Index = ({ registerForm, onChange, onSubmit }) => {
       onSubmit={(e) => onSubmit(e, ID, Message)}
     >
       <div className='title'>Register</div>
-      {/* 화면 진입 시 Input ID를 가리키도록 활성화 필요 */}
       <input
         ref={ID}
         name='user_id'

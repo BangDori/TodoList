@@ -1,3 +1,4 @@
+// Not Found page
 import React from 'react';
 
 const NotFound = () => {

@@ -1,3 +1,4 @@
+// Routing page
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import ListBox from '../styles/pages/ListBox';
 import HomeIndex from './home/Index';

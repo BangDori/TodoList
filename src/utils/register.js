@@ -6,6 +6,7 @@ const status = {
   pwd_done: false,
 };
 
+// 회원가입 정보가 올바르게 확인되었는지 확인
 function checkRegister() {
   const { id_done, pwd_done, name_done } = status;
   if (id_done && pwd_done && name_done) {
@@ -19,6 +20,8 @@ function checkRegister() {
   return false;
 }
 
+// 입력칸에 제대로 입력하였을 경우, 초록색 표시
+// 제대로 입력하지 않았을 경우, 빨간색 표시
 function validation({ value }, ref, callback) {
   if (value === '') {
     ref.current.style = 'outline: none';
@@ -29,6 +32,7 @@ function validation({ value }, ref, callback) {
   }
 }
 
+// 아이디가 올바르게 입력되었는지 검사
 function validationID(user_id) {
   if (regExpID.test(user_id)) {
     status.id_done = true;
@@ -39,6 +43,7 @@ function validationID(user_id) {
   return false;
 }
 
+// 비밀번호가 올바르게 입력되었는지 검사
 function validationPWD(user_password) {
   if (user_password.length >= 8 && regExpPW.test(user_password)) {
     status.pwd_done = true;
@@ -49,6 +54,7 @@ function validationPWD(user_password) {
   return false;
 }
 
+// 이름이 올바르게 입력되었는지 검사
 function validationName(user_name) {
   if (!patternSpec.test(user_name) && regExpName.test(user_name)) {
     status.name_done = true;

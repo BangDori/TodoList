@@ -4,18 +4,22 @@ import LoginBox from '../../styles/pages/LoginBox';
 import Modal from '../../components/Modal';
 
 const Index = ({ loginForm, onChange, onSubmit }) => {
+  // modal 창 여부를 useState hook을 이용하는 상태를 저장
   const [modal, setModal] = useState({
-    param: '',
-    visible: false,
+    param: '', // 아이디 찾기, 비밀번호 찾기 구분
+    visible: false, // 모달창을 on, off 구분
   });
   const { user_id, user_password } = loginForm;
   const ID = useRef(null);
   const Message = useRef(null);
 
+  // 모달창을 열였을 경우
   const show = useCallback((param) => setModal({ param, visible: true }), []);
+  // 모달창을 닫았을 경우
   const hide = useCallback(() => setModal({ param: '', visible: false }), []);
 
   useEffect(() => {
+    // 로그인 화면에 들어올 시, ID에 focus를 적용시켜 줌으로써 UX 향상
     ID.current.focus();
   }, []);
 

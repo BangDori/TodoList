@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react';
 import ModalBox from '../styles/pages/Modal';
 import 'rodal/lib/rodal.css';
+// 모달창 구현을 위해 rodal 라이브러리 사용
 import Rodal from 'rodal';
 import { findUser } from '../services/user';
 
@@ -12,13 +13,22 @@ const Modal = ({ subject, visible, onHide }) => {
   const onClick = async () => {
     try {
       if (subject === 'id') {
+        /**
+         * 유저의 아이디 검색
+         * 이름, 타입 전달
+         */
         const searchID = await findUser(name, 'name');
         Message.current.textContent = `ID: ${searchID[0].user_id}`;
       } else {
+        /**
+         * 유저의 비밀번호 검색
+         * 아이디, 타입 전달
+         */
         const searchPWD = await findUser(id, 'id');
         Message.current.textContent = `Password: ${searchPWD[0].user_password}`;
       }
     } catch (e) {
+      // 에러메시지
       Message.current.textContent = e.message;
       setTimeout(() => {
         Message.current.textContent = '';

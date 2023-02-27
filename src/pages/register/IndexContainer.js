@@ -22,6 +22,7 @@ const IndexContainer = () => {
 
   const onChange = useCallback(
     (e, ref) => {
+      // 아이디, 비밀번호, 이름에 대한 유효성 검사
       if (e.target.name === 'user_id') {
         validation(e.target, ref, validationID);
       } else if (e.target.name === 'user_password') {
@@ -40,7 +41,9 @@ const IndexContainer = () => {
 
   const onSubmit = async (e, ID, Message) => {
     e.preventDefault();
+    // checkRegister 함수를 통해 회원가입 정보가 올바르게 입력되었는지 확인
     if (checkRegister()) {
+      // 회원가입 정보 서버에 등록
       await register(form);
 
       id.current += 1;

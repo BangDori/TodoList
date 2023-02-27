@@ -62,6 +62,7 @@ const TodoListItemBox = styled.div`
   }
 `;
 
+// 각 데이터에 대한 View
 const TodoListItem = ({ todo, onToggle, onRemove, style }) => {
   const { id, text, checked } = todo;
 

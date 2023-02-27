@@ -1,6 +1,9 @@
 import React, { useCallback } from 'react';
-import { List } from 'react-virtualized';
 import TodoListItem from './TodoListItem';
+/**
+ * 적당한 양의 데이터를 보여주기 위한, react-virtualized 라이브러리
+ */
+import { List } from 'react-virtualized';
 
 const TodoList = ({ todos, onToggle, onRemove }) => {
   /**
