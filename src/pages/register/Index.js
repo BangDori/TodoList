@@ -1,7 +1,8 @@
+// Register index page
 import React, { useEffect, useRef } from 'react';
-import RegisterBox from '../styles/pages/RegisterBox';
+import RegisterBox from '../../styles/pages/RegisterBox';
 
-const Register = ({ registerForm, onChange, onSubmit }) => {
+const Index = ({ registerForm, onChange, onSubmit }) => {
   const { user_id, user_password, user_name } = registerForm;
   const ID = useRef(null);
   const PWD = useRef(null);
@@ -49,4 +50,4 @@ const Register = ({ registerForm, onChange, onSubmit }) => {
   );
 };
 
-export default Register;
+export default Index;

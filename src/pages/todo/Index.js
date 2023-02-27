@@ -1,7 +1,8 @@
+// Todo index page
 import React from 'react';
-import TodoTemplate from './todo/TodoTemplate';
+import TodoTemplate from './TodoTemplate';
 
-const Todos = ({ isLogin }) => {
+const Index = ({ isLogin }) => {
   if (!isLogin.status) {
     return (
       <>
@@ -13,4 +14,4 @@ const Todos = ({ isLogin }) => {
   return <TodoTemplate isLogin={isLogin} />;
 };
 
-export default Todos;
+export default Index;

@@ -1,7 +1,8 @@
+// Logout index page
 import React from 'react';
-import LogoutBox from '../styles/pages/LogoutBox';
+import LogoutBox from '../../styles/pages/LogoutBox';
 
-const Logout = ({ onLogout }) => {
+const Index = ({ onLogout }) => {
   return (
     <LogoutBox>
       <button onClick={() => onLogout({ name: '', status: false })}>
@@ -11,4 +12,4 @@ const Logout = ({ onLogout }) => {
   );
 };
 
-export default Logout;
+export default Index;

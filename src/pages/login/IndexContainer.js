@@ -1,8 +1,9 @@
+// Login Container
 import { useCallback, useState } from 'react';
-import Login from './Login';
-import { login } from '../services/user';
+import Login from './Index';
+import { login } from '../../services/user';
 
-const LoginContainer = ({ onLogin }) => {
+const IndexContainer = ({ onLogin }) => {
   const [form, setForm] = useState({
     user_id: '',
     user_password: '',
@@ -41,4 +42,4 @@ const LoginContainer = ({ onLogin }) => {
   return <Login loginForm={form} onChange={onChange} onSubmit={onSubmit} />;
 };
 
-export default LoginContainer;
+export default IndexContainer;

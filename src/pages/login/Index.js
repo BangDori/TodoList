@@ -1,8 +1,9 @@
+// Login index page
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import LoginBox from '../styles/pages/LoginBox';
-import Modal from '../components/Modal';
+import LoginBox from '../../styles/pages/LoginBox';
+import Modal from '../../components/Modal';
 
-const Login = ({ loginForm, onChange, onSubmit }) => {
+const Index = ({ loginForm, onChange, onSubmit }) => {
   const [modal, setModal] = useState({
     param: '',
     visible: false,
@@ -54,4 +55,4 @@ const Login = ({ loginForm, onChange, onSubmit }) => {
   );
 };
 
-export default Login;
+export default Index;

@@ -1,16 +1,17 @@
-import Register from './Register';
+// Register Container
+import Register from './Index';
 import { useCallback, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { register } from '../services/user';
+import { register } from '../../services/user';
 import {
   validation,
   validationID,
   validationPWD,
   validationName,
   checkRegister,
-} from '../utils/register';
+} from '../../utils/register';
 
-const RegisterContainer = () => {
+const IndexContainer = () => {
   const navigate = useNavigate();
   const [form, setForm] = useState({
     user_name: '',
@@ -65,4 +66,4 @@ const RegisterContainer = () => {
   );
 };
 
-export default RegisterContainer;
+export default IndexContainer;

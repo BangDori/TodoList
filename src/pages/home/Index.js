@@ -1,8 +1,9 @@
+// Home index page
 import React, { useRef } from 'react';
-import { useTimer } from '../hooks/useTimer';
-import HomeBox from '../styles/pages/HomeBox';
+import { useTimer } from '../../hooks/useTimer';
+import HomeBox from '../../styles/pages/HomeBox';
 
-const Home = () => {
+const Index = () => {
   const clock = useRef(null);
 
   useTimer({ clock });
@@ -18,4 +19,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Index;

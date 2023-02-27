@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Menu from './components/Menu';
-import ContentList from './pages/ContentList';
+import RoutePage from './pages/RoutePage';
 import Box from './styles/Box';
 
 const App = () => {
@@ -13,7 +13,7 @@ const App = () => {
   return (
     <Box>
       <Menu isLogin={isLogin} onLogout={setIsLogin} />
-      <ContentList isLogin={isLogin} onLogin={setIsLogin} />
+      <RoutePage isLogin={isLogin} onLogin={setIsLogin} />
     </Box>
   );
 };
