@@ -63,7 +63,6 @@ const TodoListItemBox = styled.div`
 `;
 
 const TodoListItem = ({ todo, onToggle, onRemove, style }) => {
-  console.log(todo.id, 'load');
   const { id, text, checked } = todo;
 
   return (
