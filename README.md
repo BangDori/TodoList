@@ -35,6 +35,3 @@ npx json-server json-server/db.json --port 4000
 
 ## 실행 화면
 <img src="https://user-images.githubusercontent.com/44726494/220847000-c857900a-23f8-4acc-8017-e1f72d2d7594.png" width="972px" />
-
-## 참고 자료
-색상조합: https://www.colorhunt.co/
