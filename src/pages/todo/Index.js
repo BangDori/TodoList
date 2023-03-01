@@ -1,8 +1,11 @@
 // Todo index page
-import React from 'react';
+import React, { useContext } from 'react';
+import UserContext from '../../contexts/user';
 import TodoTemplate from './TodoTemplate';
 
-const Index = ({ isLogin }) => {
+const Index = () => {
+  const { isLogin } = useContext(UserContext).state;
+
   if (!isLogin.status) {
     // 로그인 되지 않았을 경우
     return (
@@ -13,7 +16,7 @@ const Index = ({ isLogin }) => {
   }
 
   // 로그인 되었을 경우
-  return <TodoTemplate isLogin={isLogin} />;
+  return <TodoTemplate />;
 };
 
 export default Index;

@@ -1,4 +1,10 @@
-import { useCallback, useState, useReducer, useEffect } from 'react';
+import {
+  useCallback,
+  useState,
+  useReducer,
+  useEffect,
+  useContext,
+} from 'react';
 import TodosBox from '../../styles/pages/TodosBox';
 import {
   getTot,
@@ -8,6 +14,7 @@ import {
 } from '../../services/todo';
 import TodoInsert from './TodoInsert';
 import TodoList from './TodoList';
+import UserContext from '../../contexts/user';
 
 // 리듀서를 통한 복잡한 상태 관리
 function reducer(todos, action) {
@@ -38,7 +45,8 @@ async function fetchTodos(name) {
     .then((data) => data);
 }
 
-const TodoTemplate = ({ isLogin }) => {
+const TodoTemplate = () => {
+  const { isLogin } = useContext(UserContext).state;
   // todos 로딩이 끝났음을 확인하기 위해 useState hook으로 isLoading 상태 관리
   const [isLoading, setIsLoading] = useState(false);
   // todos에 대한 복잡한 상태 관리를 위해 useReducer hook으로 todos 상태 관리
