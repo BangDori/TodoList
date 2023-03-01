@@ -1,4 +1,10 @@
-import { useCallback, useState, useReducer, useEffect } from 'react';
+import {
+  useCallback,
+  useState,
+  useReducer,
+  useEffect,
+  useContext,
+} from 'react';
 import TodosBox from '../../styles/pages/TodosBox';
 import {
   getTot,
@@ -8,6 +14,7 @@ import {
 } from '../../services/todo';
 import TodoInsert from './TodoInsert';
 import TodoList from './TodoList';
+import UserContext from '../../contexts/user';
 
 // 리듀서를 통한 복잡한 상태 관리
 function reducer(todos, action) {
@@ -38,7 +45,8 @@ async function fetchTodos(name) {
     .then((data) => data);
 }
 
-const TodoTemplate = ({ isLogin }) => {
+const TodoTemplate = () => {
+  const { state } = useContext(UserContext);
   // todos 로딩이 끝났음을 확인하기 위해 useState hook으로 isLoading 상태 관리
   const [isLoading, setIsLoading] = useState(false);
   // todos에 대한 복잡한 상태 관리를 위해 useReducer hook으로 todos 상태 관리
@@ -50,7 +58,7 @@ const TodoTemplate = ({ isLogin }) => {
       // 데이터를 불러오기 전까지 loading 상태를 true로 설정
       setIsLoading(true);
       try {
-        await fetchTodos(isLogin.name).then((data) => {
+        await fetchTodos(state.isLogin.name).then((data) => {
           // 정상적으로 fetch 되었을 경우, dispatch를 통해 todos 상태에 데이터들을 저장
           dispatch({ type: 'SET_DATA', data });
         });
@@ -62,7 +70,7 @@ const TodoTemplate = ({ isLogin }) => {
       setIsLoading(false);
     };
     fetchData();
-  }, [isLogin]);
+  }, [state]);
 
   const onInsert = useCallback(
     async (text) => {
@@ -71,7 +79,7 @@ const TodoTemplate = ({ isLogin }) => {
 
       const todo = {
         id: id,
-        user_name: isLogin.name,
+        user_name: state.isLogin.name,
         text,
         checked: false,
       };
@@ -81,7 +89,7 @@ const TodoTemplate = ({ isLogin }) => {
       // 상태를 데이터베이스에 저장하기
       insertTodoList(todo);
     },
-    [isLogin],
+    [state],
   );
 
   const onToggle = useCallback(
