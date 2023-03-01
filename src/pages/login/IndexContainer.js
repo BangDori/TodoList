@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom/dist';
 import UserContext from '../../contexts/user';
 
 const IndexContainer = () => {
-  const { actions } = useContext(UserContext);
+  const { setIsLogin } = useContext(UserContext).actions;
   const navigate = useNavigate();
 
   // 아이디와 비밀번호 입력 상태 관리
@@ -43,7 +43,7 @@ const IndexContainer = () => {
       });
 
       // 로그인 성공시, app.js에 로그인 유저의 정보 저장
-      actions.setIsLogin({ id: user_id, name: user_name, status: true });
+      setIsLogin({ id: user_id, name: user_name, status: true });
       navigate('/');
     } catch (e) {
       // 로그인 실패시, 에러 메시지를 화면에 출력

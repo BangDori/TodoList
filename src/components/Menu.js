@@ -43,18 +43,16 @@ const Menu = () => {
   // useLocation 내부에 pathname 속성에 현재 브라우저의 url이 담겨 있음
   const { pathname } = location;
   // 현재 로그인중인 유저 받아오기
-  const { state } = useContext(UserContext);
+  const { isLogin } = useContext(UserContext).state;
 
   return (
     <MenuBox>
       <div className='menu_list'>
-        {state.isLogin.status ? (
-          <h3>{state.isLogin.name}님 환영합니다.</h3>
-        ) : null}
+        {isLogin.status ? <h3>{isLogin.name}님 환영합니다.</h3> : null}
         <ul>
           {menus.map((menu) => {
-            if (!state.isLogin.status && menu.id === 3) return null;
-            else if (state.isLogin.status && menu.id === 4) return null;
+            if (!isLogin.status && menu.id === 3) return null;
+            else if (isLogin.status && menu.id === 4) return null;
 
             return (
               <li key={menu.id}>

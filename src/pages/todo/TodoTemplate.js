@@ -46,7 +46,7 @@ async function fetchTodos(name) {
 }
 
 const TodoTemplate = () => {
-  const { state } = useContext(UserContext);
+  const { isLogin } = useContext(UserContext).state;
   // todos 로딩이 끝났음을 확인하기 위해 useState hook으로 isLoading 상태 관리
   const [isLoading, setIsLoading] = useState(false);
   // todos에 대한 복잡한 상태 관리를 위해 useReducer hook으로 todos 상태 관리
@@ -58,7 +58,7 @@ const TodoTemplate = () => {
       // 데이터를 불러오기 전까지 loading 상태를 true로 설정
       setIsLoading(true);
       try {
-        await fetchTodos(state.isLogin.name).then((data) => {
+        await fetchTodos(isLogin.name).then((data) => {
           // 정상적으로 fetch 되었을 경우, dispatch를 통해 todos 상태에 데이터들을 저장
           dispatch({ type: 'SET_DATA', data });
         });
@@ -70,7 +70,7 @@ const TodoTemplate = () => {
       setIsLoading(false);
     };
     fetchData();
-  }, [state]);
+  }, [isLogin]);
 
   const onInsert = useCallback(
     async (text) => {
@@ -79,7 +79,7 @@ const TodoTemplate = () => {
 
       const todo = {
         id: id,
-        user_name: state.isLogin.name,
+        user_name: isLogin.name,
         text,
         checked: false,
       };
@@ -89,7 +89,7 @@ const TodoTemplate = () => {
       // 상태를 데이터베이스에 저장하기
       insertTodoList(todo);
     },
-    [state],
+    [isLogin],
   );
 
   const onToggle = useCallback(

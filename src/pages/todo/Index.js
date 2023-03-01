@@ -4,9 +4,9 @@ import UserContext from '../../contexts/user';
 import TodoTemplate from './TodoTemplate';
 
 const Index = () => {
-  const { state } = useContext(UserContext);
+  const { isLogin } = useContext(UserContext).state;
 
-  if (!state.isLogin.status) {
+  if (!isLogin.status) {
     // 로그인 되지 않았을 경우
     return (
       <>

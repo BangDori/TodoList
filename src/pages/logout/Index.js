@@ -5,11 +5,11 @@ import UserContext from '../../contexts/user';
 import LogoutBox from '../../styles/pages/LogoutBox';
 
 const Index = () => {
-  const { actions } = useContext(UserContext);
+  const { setIsLogin } = useContext(UserContext).actions;
   const navigate = useNavigate();
 
   const onClick = () => {
-    actions.setIsLogin({ id: '', name: '', status: false });
+    setIsLogin({ id: '', name: '', status: false });
     navigate('/');
   };
 

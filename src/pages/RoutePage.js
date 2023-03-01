@@ -11,14 +11,14 @@ import { useContext } from 'react';
 import UserContext from '../contexts/user';
 
 const RoutePage = () => {
-  const { state } = useContext(UserContext);
+  const { isLogin } = useContext(UserContext).state;
 
   return (
     <ListBox>
       <Routes>
         <Route path='/' element={<HomeIndex />} />
         <Route path='/register' element={<RegisterIndex />} />
-        {state.isLogin.status ? (
+        {isLogin.status ? (
           <Route path='/logout' element={<LogoutIndex />} />
         ) : (
           <Route path='/login' element={<LoginIndex />} />
