@@ -6,6 +6,7 @@ import {
   removeTodoList,
   updateTodoList,
 } from '../../services/todo';
+import React from 'react';
 import TodoInsert from './TodoInsert';
 import TodoList from './TodoList';
 import { useSelector } from 'react-redux';
@@ -111,4 +112,4 @@ const TodoTemplate = () => {
   );
 };
 
-export default TodoTemplate;
+export default React.memo(TodoTemplate);
