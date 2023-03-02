@@ -35,7 +35,7 @@ const IndexContainer = () => {
        * users table에 일치하는 아이디와 비밀번호가 존재하는지 탐색
        * 존재하지 않는다면 에러 처리
        */
-      const [{ user_name, user_id }] = await login(form);
+      const [{ user_id, user_name }] = await login(form);
 
       // 로그인에 성공했다면, 로그인 입력창 초기화
       setForm({

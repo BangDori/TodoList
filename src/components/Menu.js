@@ -43,7 +43,7 @@ const Menu = () => {
   // useLocation 내부에 pathname 속성에 현재 브라우저의 url이 담겨 있음
   const { pathname } = location;
   // 현재 로그인중인 유저 받아오기
-  const { name, status } = useSelector((state) => state.users);
+  const { name, status } = useSelector((state) => state.user);
 
   return (
     <MenuBox>

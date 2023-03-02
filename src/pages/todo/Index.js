@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import TodoTemplate from './TodoTemplate';
 
 const Index = () => {
-  const { status } = useSelector((state) => state.users);
+  const { status } = useSelector((state) => state.user);
 
   if (!status) {
     // 로그인 되지 않았을 경우

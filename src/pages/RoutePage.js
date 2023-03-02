@@ -10,7 +10,7 @@ import TodoIndex from './todo/Index';
 import NotFound from './NotFound';
 
 const RoutePage = () => {
-  const { status } = useSelector((state) => state.users);
+  const { status } = useSelector((state) => state.user);
 
   return (
     <ListBox>
