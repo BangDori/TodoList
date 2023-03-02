@@ -1,10 +1,4 @@
-import {
-  useCallback,
-  useState,
-  useReducer,
-  useEffect,
-  useContext,
-} from 'react';
+import { useCallback, useState, useEffect } from 'react';
 import TodosBox from '../../styles/pages/TodosBox';
 import {
   getTot,
@@ -12,31 +6,12 @@ import {
   removeTodoList,
   updateTodoList,
 } from '../../services/todo';
+import React from 'react';
 import TodoInsert from './TodoInsert';
 import TodoList from './TodoList';
-import UserContext from '../../contexts/user';
-
-// 리듀서를 통한 복잡한 상태 관리
-function reducer(todos, action) {
-  switch (action.type) {
-    // 초기 데이터 삽입
-    case 'SET_DATA':
-      return action.data;
-    // 데이터 삽입
-    case 'INSERT':
-      return todos.concat(action.todo);
-    // 데이터 수정
-    case 'UPDATE':
-      return todos.map((todo) =>
-        todo.id === action.id ? { ...todo, checked: !todo.checked } : todo,
-      );
-    // 데이터 삭제
-    case 'DELETE':
-      return todos.filter((todo) => todo.id !== action.id);
-    default:
-      return todos;
-  }
-}
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { init, insert, toggle, remove } from '../../store/todos';
 
 // 유저의 데이터를 query를 이용하여 불러오기
 async function fetchTodos(name) {
@@ -46,11 +21,11 @@ async function fetchTodos(name) {
 }
 
 const TodoTemplate = () => {
-  const { isLogin } = useContext(UserContext).state;
+  const dispatch = useDispatch();
+  const todos = useSelector((state) => state.todos);
+  const { name } = useSelector((state) => state.user);
   // todos 로딩이 끝났음을 확인하기 위해 useState hook으로 isLoading 상태 관리
   const [isLoading, setIsLoading] = useState(false);
-  // todos에 대한 복잡한 상태 관리를 위해 useReducer hook으로 todos 상태 관리
-  const [todos, dispatch] = useReducer(reducer, null);
 
   useEffect(() => {
     // 비동기 함수를 통해, todos가 순차적으로 처리될 수 있도록 처리
@@ -58,9 +33,9 @@ const TodoTemplate = () => {
       // 데이터를 불러오기 전까지 loading 상태를 true로 설정
       setIsLoading(true);
       try {
-        await fetchTodos(isLogin.name).then((data) => {
+        await fetchTodos(name).then((data) => {
           // 정상적으로 fetch 되었을 경우, dispatch를 통해 todos 상태에 데이터들을 저장
-          dispatch({ type: 'SET_DATA', data });
+          dispatch(init(data));
         });
       } catch (e) {
         console.log(e);
@@ -70,7 +45,7 @@ const TodoTemplate = () => {
       setIsLoading(false);
     };
     fetchData();
-  }, [isLogin]);
+  }, [name, dispatch]);
 
   const onInsert = useCallback(
     async (text) => {
@@ -79,17 +54,17 @@ const TodoTemplate = () => {
 
       const todo = {
         id: id,
-        user_name: isLogin.name,
+        user_name: name,
         text,
         checked: false,
       };
 
       // view에 반영
-      dispatch({ type: 'INSERT', todo });
+      dispatch(insert(todo));
       // 상태를 데이터베이스에 저장하기
       insertTodoList(todo);
     },
-    [isLogin],
+    [name, dispatch],
   );
 
   const onToggle = useCallback(
@@ -98,19 +73,22 @@ const TodoTemplate = () => {
       const [todo] = todos.filter((t) => t.id === id);
 
       // view에 반영
-      dispatch({ type: 'UPDATE', id });
+      dispatch(toggle(id));
       // 수정된 상태를 데이터베이스에 저장하기
       updateTodoList(id, todo);
     },
-    [todos],
+    [todos, dispatch],
   );
 
-  const onRemove = useCallback(async (id) => {
-    // view 반영
-    dispatch({ type: 'DELETE', id });
-    // id와 일치하는 데이터 데이터베이스에서 삭제하기
-    removeTodoList(id);
-  }, []);
+  const onRemove = useCallback(
+    async (id) => {
+      // view 반영
+      dispatch(remove(id));
+      // id와 일치하는 데이터 데이터베이스에서 삭제하기
+      removeTodoList(id);
+    },
+    [dispatch],
+  );
 
   // 로딩중 이라면, 로딩 중이라는 문구 표시
   if (isLoading) {
@@ -128,10 +106,10 @@ const TodoTemplate = () => {
         <div className='app-title'>Todo List</div>
         <TodoInsert onInsert={onInsert} />
 
-        <TodoList todos={todos} onToggle={onToggle} onRemove={onRemove} />
+        <TodoList onToggle={onToggle} onRemove={onRemove} />
       </div>
     </TodosBox>
   );
 };
 
-export default TodoTemplate;
+export default React.memo(TodoTemplate);

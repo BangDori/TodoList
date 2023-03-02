@@ -4,8 +4,10 @@ import TodoListItem from './TodoListItem';
  * 적당한 양의 데이터를 보여주기 위한, react-virtualized 라이브러리
  */
 import { List } from 'react-virtualized';
+import { useSelector } from 'react-redux';
 
-const TodoList = ({ todos, onToggle, onRemove }) => {
+const TodoList = ({ onToggle, onRemove }) => {
+  const todos = useSelector((state) => state.todos);
   /**
    * 기본적으로, react-virtualized는 오직 화면에 보여지는 행들만 렌더링한다.
    * 하지만, 유저가 빠르게 스클롤링 할 때와 같은 경우에
