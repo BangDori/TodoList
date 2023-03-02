@@ -12,10 +12,10 @@ const initialState = {
   status: false,
 };
 
-const users = handleActions(
+const user = handleActions(
   {
     [SET]: (state, action) => action.payload,
-    [RESET]: () => ({
+    [RESET]: (state, action) => ({
       id: '',
       name: '',
       status: false,
@@ -24,4 +24,4 @@ const users = handleActions(
   initialState,
 );
 
-export default users;
+export default user;
