@@ -1,12 +1,12 @@
 // Todo index page
-import React, { useContext } from 'react';
-import UserContext from '../../contexts/user';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import TodoTemplate from './TodoTemplate';
 
 const Index = () => {
-  const { isLogin } = useContext(UserContext).state;
+  const { status } = useSelector((state) => state.users);
 
-  if (!isLogin.status) {
+  if (!status) {
     // 로그인 되지 않았을 경우
     return (
       <>

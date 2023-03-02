@@ -1,12 +1,13 @@
 // Login Container
-import { useCallback, useContext, useState } from 'react';
+import { useCallback, useState } from 'react';
 import Login from './Index';
 import { login } from '../../services/user';
 import { useNavigate } from 'react-router-dom/dist';
-import UserContext from '../../contexts/user';
+import { useDispatch } from 'react-redux';
+import { set } from '../../store/user';
 
 const IndexContainer = () => {
-  const { setIsLogin } = useContext(UserContext).actions;
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   // 아이디와 비밀번호 입력 상태 관리
@@ -43,7 +44,7 @@ const IndexContainer = () => {
       });
 
       // 로그인 성공시, app.js에 로그인 유저의 정보 저장
-      setIsLogin({ id: user_id, name: user_name, status: true });
+      dispatch(set({ id: user_id, name: user_name, status: true }));
       navigate('/');
     } catch (e) {
       // 로그인 실패시, 에러 메시지를 화면에 출력

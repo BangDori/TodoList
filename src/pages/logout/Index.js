@@ -1,15 +1,15 @@
 // Logout index page
-import React, { useContext } from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom/dist';
-import UserContext from '../../contexts/user';
 import LogoutBox from '../../styles/pages/LogoutBox';
+import { reset } from '../../store/user';
 
 const Index = () => {
-  const { setIsLogin } = useContext(UserContext).actions;
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const onClick = () => {
-    setIsLogin({ id: '', name: '', status: false });
+    dispatch(reset({ id: '', name: '', status: false }));
     navigate('/');
   };
 
