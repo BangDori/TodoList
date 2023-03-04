@@ -1,7 +1,8 @@
 // Login index page
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import LoginBox from '../../styles/pages/LoginBox';
-import Modal from '../../components/Modal';
+import loadable from '@loadable/component';
+const Modal = loadable(() => import('../../components/Modal'));
 
 const Index = ({ loginForm, onChange, onSubmit }) => {
   // modal 창 여부를 useState hook을 이용하는 상태를 저장
