@@ -2,12 +2,14 @@
 import { Route, Routes } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ListBox from '../styles/pages/ListBox';
-import HomeIndex from './home/Index';
-import RegisterIndex from './register/IndexContainer';
-import LoginIndex from './login/IndexContainer';
-import LogoutIndex from './logout/Index';
-import TodoIndex from './todo/Index';
-import NotFound from './NotFound';
+import loadable from '@loadable/component';
+
+const HomeIndex = loadable(() => import('./home/Index'));
+const RegisterIndex = loadable(() => import('./register/IndexContainer'));
+const LoginIndex = loadable(() => import('./login/IndexContainer'));
+const LogoutIndex = loadable(() => import('./logout/Index'));
+const TodoIndex = loadable(() => import('./todo/Index'));
+const NotFound = loadable(() => import('./NotFound'));
 
 const RoutePage = () => {
   const { status } = useSelector((state) => state.user);
@@ -22,8 +24,12 @@ const RoutePage = () => {
         ) : (
           <Route path='/login' element={<LoginIndex />} />
         )}
-        <Route path='/todos' element={<TodoIndex />} />
-        <Route path='/*' element={<NotFound />} />
+        {status ? (
+          <Route path='/todos' element={<TodoIndex />} />
+        ) : (
+          <Route path='/todos' element={<NotFound type='login' />} />
+        )}
+        <Route path='/*' element={<NotFound type='path' />} />
       </Routes>
     </ListBox>
   );
